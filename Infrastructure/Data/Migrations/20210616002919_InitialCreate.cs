@@ -39,7 +39,7 @@ namespace Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImagemUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdTipoProduto = table.Column<int>(type: "int", nullable: false),

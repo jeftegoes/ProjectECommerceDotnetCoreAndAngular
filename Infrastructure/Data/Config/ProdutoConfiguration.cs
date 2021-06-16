@@ -10,7 +10,7 @@ namespace Infrastructure.Data.Config
         {
             builder.Property(p => p.Id).IsRequired();
             builder.Property(p => p.Nome).IsRequired().HasMaxLength(100);
-            builder.Property(p => p.Descricao).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Descricao).IsRequired().HasMaxLength(250);
             builder.Property(p => p.Preco).HasColumnType("decimal(18, 2)");
             builder.Property(p => p.ImagemUrl).IsRequired();
             builder.HasOne(p => p.MarcaProduto).WithMany().HasForeignKey(p => p.IdMarcaProduto);
