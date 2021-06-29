@@ -24,6 +24,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddControllers();
             services.AddDbContext<LojaContext>(x => x.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
 

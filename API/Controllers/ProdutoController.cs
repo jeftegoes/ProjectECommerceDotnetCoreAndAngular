@@ -11,16 +11,22 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ProdutoController : ControllerBase
     {
-        private readonly IProdutoRepository _repository;
+        private readonly IGenericRepository<Produto> _protudoRepository;
+        private readonly IGenericRepository<MarcaProduto> _marcaProdutoRepository;
+        private readonly IGenericRepository<TipoProduto> _tipoProdutoRepository;
 
-        public ProdutoController(IProdutoRepository repository)
+        public ProdutoController(IGenericRepository<Produto> protudoRepository,
+            IGenericRepository<MarcaProduto> marcaProdutoRepository,
+            IGenericRepository<TipoProduto> tipoProdutoRepository)
         {
-            _repository = repository;
+            _protudoRepository = protudoRepository;
+            _marcaProdutoRepository = marcaProdutoRepository;
+            _tipoProdutoRepository = tipoProdutoRepository;
         }
 
         public async Task<ActionResult<IReadOnlyList<Produto>>> GetProdutos()
         {
-            var produtos = await _repository.GetProdutosAsync();
+            var produtos = await _protudoRepository.ListAllAsync();
 
             return Ok(produtos);
         }
@@ -28,7 +34,7 @@ namespace API.Controllers
         [HttpGet("marcasProduto")]
         public async Task<ActionResult<IReadOnlyList<Produto>>> GetMarcasProduto()
         {
-            var marcasProduto = await _repository.GetMarcasProdutoAsync();
+            var marcasProduto = await _marcaProdutoRepository.ListAllAsync();
 
             return Ok(marcasProduto);
         }
@@ -36,7 +42,7 @@ namespace API.Controllers
         [HttpGet("tiposProduto")]
         public async Task<ActionResult<IReadOnlyList<Produto>>> GetTiposProduto()
         {
-            var tiposProduto = await _repository.GetTiposProdutoAsync();
+            var tiposProduto = await _tipoProdutoRepository.ListAllAsync();
 
             return Ok(tiposProduto);
         }
@@ -44,7 +50,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Produto>> GetProduto(int id)
         {
-            var produto = await _repository.GetProdutoByIdAsync(id);
+            var produto = await _protudoRepository.GetByIdAsync(id);
 
             return Ok(produto);
         }
